@@ -1,0 +1,507 @@
+<script type="text/javascript">google.load("jquery", "1.3.2");</script>
+
+<!doctype html>
+<html>
+<head>
+	<title>On the Posterior Distribution in Denoising: Application to Uncertainty Quantification</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  	<link href="style.css" rel="stylesheet" type="text/css">
+	<meta property="og:image" content="resources/teaser.png"/> 
+	<meta property="og:title" content="On the Posterior Distribution in Denoising: Application to Uncertainty Quantification" />
+	<meta property="og:description" content="" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+	<script src="https://kit.fontawesome.com/ad96f96272.js" crossorigin="anonymous"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	
+	<!-- navigation bar on the top, nav bar stick to the top -->
+	<nav id="navbar_top" class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary" style="margin-bottom: 15px;">
+		<div class="container-xl">
+				<a class="navbar-brand" href="https://hilamanor.github.io/GaussianDenoisingPosterior">Posterior Distribution in Denoising</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main_nav">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="main_nav">
+			<ul class="navbar-nav ms-auto">
+				<li class="nav-item"><a class="nav-link" href="#uncertainty-viz">Uncertainty Visualization</a></li>
+				<li class="nav-item"><a class="nav-link" href="#marg-dist">Marginal Distributions</a></li>
+				<li class="nav-item"><a class="nav-link" href="#more-faces">More Samples</a></li>
+				<li class="nav-item"><a class="nav-link" href="#paper">Paper</a></li>
+			</ul>
+			</div> 
+		</div> 
+		</nav>
+	<!-- end nav bar -->
+
+	<div class="container-xl"> 
+		<!-- top button -->
+		<button type="button" class="btn btn-danger btn-floating btn-lg" id="btn-back-to-top">
+			<i class="fas fa-arrow-up"></i>
+		</button>
+		<!-- end top button -->
+
+		<!-- top - author names, affiliation and links -->
+		<center>
+			<h1>On the Posterior Distribution in Denoising:<br> Application to Uncertainty Quantification</h1>
+			<h4>Under Review</h4>
+			<div class="container-xl">
+				<div class="row justify-content-center">
+					<div class="col-md-auto">
+						<span style="font-size:24px"><a href="https://www.linkedin.com/in/hilamanor/" target="_blank" rel="noopener noreferrer">Hila Manor</a></span>
+					</div>
+					<div class="col-md-auto">
+						<span style="font-size:24px"><a href="https://tomer.net.technion.ac.il/" target="_blank" rel="noopener noreferrer">Tomer Michaeli</a></span>
+					</div>
+				</div>
+			</div>
+
+			<p class="text-center affilation" style="font-size: 20pt;">Technion - Israel Institute of Technology<p>
+
+			<div class="container-xl">
+				<div class="row justify-content-center">
+					<div class="col-md-auto">
+						<span style="font-size:24px"><a href='resources/paper.pdf' target="_blank" rel="noopener noreferrer">[<i class="fas fa-file-pdf"></i> Paper]</a></span>
+					</div>
+					<div class="col-md-auto">
+						<span style="font-size:24px"><a href='resources/supp.pdf' target="_blank" rel="noopener noreferrer">[<i class="fas fa-file-pdf"></i> Supplementary]</a></span>
+					</div>
+					<div class="col-md-auto">
+						<span style="font-size:24px"><a href="https://github.com/HilaManor/GaussianDenoisingPosterior/" target="_blank" rel="noopener noreferrer">[<i class="fab fa-github"></i> Code]</a></span>
+					</div>
+				</div>
+			</div>
+		</center>
+		<!-- end top -->
+
+		<!-- abstract and teaser image-->
+		<center>
+			<div class="container-xl" style="margin-top: 20px; max-width: 800px">
+                <video autoplay loop muted playsinline width="100%">
+                    <source src="./resources/Animations_Intro.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>                  
+			</div>
+		<h1 style="margin-top: 10px;">Abstract</h1>
+		</center>
+		<p>
+            Denoisers play a central role in many applications, from noise suppression in low-grade imaging sensors, to empowering score-based generative models. 
+            The latter category of methods makes use of Tweedie's formula, which links the posterior mean in Gaussian denoising (<i>i.e.</i>, the minimum MSE denoiser) with the score of the data distribution.
+            Here, we derive a fundamental relation between the higher-order central moments of the posterior distribution, and the higher-order derivatives of the posterior mean. We harness this result for uncertainty quantification of pre-trained denoisers.
+            Particularly, we show how to efficiently compute the principal components of the posterior distribution for any desired region of an image, as well as to approximate the full marginal distribution along those (or any other) one-dimensional directions. 
+            Our method is fast and memory efficient, as it does not explicitly compute or store the high-order moment tensors and it requires no training or fine tuning of the denoiser.
+        </p>
+	
+		<hr id="uncertainty-viz">
+		<center><h1 style="margin-top: 65px;">Uncertainty Visualization</h1></center>
+		<p>We propose an efficient way to compute the principal components of the posterior distribution.</p>
+		
+		<div class="container-xl">
+			<div class="row gy-3 row-cols-1 row-cols-sm-3 row-cols-md-6 justify-content-center">
+                <div class="col" style="max-width: 350px;">
+					<center>
+                        <img src="./resources/faces-514/npatch.png" width="100%" style="max-width: 150px;">
+                        <p style="margin-top: 5px;">Noisy Image</p>
+					</center>
+				</div>
+                <div class="col" style="max-width: 350px;"><center>
+                    <img id="imgEV-faces-514" src="./resources/faces-514/pc3_eigvec.png" width="100%" style="max-width: 150px;">
+                    <p id="txtEV-faces-514" style="margin-top: 5px;">PC #3</p>
+                    <div class="btn-group my-btn" id="dropdown-container-faces-514">
+                        <button type="button" onclick="change_ev('faces-514', 3)" class="btn btn-info">Change PC</button>
+                        <button type="button" class="btn my-btn-info btn-info dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" onclick="change_ev('faces-514', 1)">1</a></li>
+                            <li><a class="dropdown-item" onclick="change_ev('faces-514', 2)">2</a></li>
+                            <li><a class="dropdown-item" onclick="change_ev('faces-514', 4)">4</a></li>
+                            <li><hr class="dropdown-divider"></li> 
+                            <li><a class="dropdown-item" onclick="change_ev('faces-514', 3)">3</a></li>
+                        </ul>
+                    </div>
+                    <!-- </center>
+                </div>
+                <div class="col-sm" style="max-width: 350px;"><center> -->
+                </center>
+                </div>
+				<div class="col" style="max-width: 350px;">
+					<center>
+                        <img id="imgChange-faces-514" src="./resources/faces-514/ev3_0.00.png" width="100%" style="max-width: 150px;" data-value="3">
+                        <p id="txtChange-faces-514" style="margin-top: 5px;">\[\hat{x} + 0.00 \sqrt{\lambda}\]</p>
+                        <input id="range-faces-514" type="range" min="-3" max="3" step="0.12" value="0" class="form-range custom-range" style="max-width: 150px;">
+					</center>
+				</div>
+
+                <div class="col" style="max-width: 350px;">
+					<center>
+                        <img src="./resources/faces-213/npatch.png" width="100%" style="max-width: 150px;">
+                        <p style="margin-top: 5px;">Noisy Image</p>
+					</center>
+				</div>
+                <div class="col" style="max-width: 350px;"><center>
+                    <img id="imgEV-faces-213" src="./resources/faces-213/pc1_eigvec.png" width="100%" style="max-width: 150px;">
+                    <p id="txtEV-faces-213" style="margin-top: 5px;">PC #1</p>
+                    <div class="btn-group my-btn" id="dropdown-container-faces-213">
+                        <button type="button" onclick="change_ev('faces-213', 1)" class="btn btn-info">Change PC</button>
+                        <button type="button" class="btn my-btn-info btn-info dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" onclick="change_ev('faces-213', 2)">2</a></li>
+                            <li><a class="dropdown-item" onclick="change_ev('faces-213', 3)">3</a></li>
+                            <li><hr class="dropdown-divider"></li> 
+                            <li><a class="dropdown-item" onclick="change_ev('faces-213', 1)">1</a></li>
+                        </ul>
+                    </div>
+                    <!-- </center>
+                </div>
+                <div class="col-sm" style="max-width: 350px;"><center> -->
+                </center>
+                </div>
+				<div class="col" style="max-width: 350px;">
+					<center>
+                        <img id="imgChange-faces-213" src="./resources/faces-213/ev1_0.00.png" width="100%" style="max-width: 150px;" data-value="1">
+                        <p id="txtChange-faces-213" style="margin-top: 5px;">\[\hat{x} + 0.00 \sqrt{\lambda}\]</p>
+                        <input id="range-faces-213" type="range" min="-3" max="3" step="0.12" value="0" class="form-range custom-range" style="max-width: 150px;">
+					</center>
+				</div>
+            
+                <div class="col" style="max-width: 350px;">
+					<center>
+                        <img src="./resources/faces-34/npatch.png" width="100%" style="max-width: 150px;">
+                        <p style="margin-top: 5px;">Noisy Image</p>
+					</center>
+				</div>
+                <div class="col" style="max-width: 350px;"><center>
+                    <img id="imgEV-faces-34" src="./resources/faces-34/pc3_eigvec.png" width="100%" style="max-width: 150px;">
+                    <p id="txtEV-faces-34" style="margin-top: 5px;">PC #3</p>
+                    <div class="btn-group my-btn" id="dropdown-container-faces-34">
+                        <button type="button" onclick="change_ev('faces-34', 3)" class="btn btn-info">Change PC</button>
+                        <button type="button" class="btn my-btn-info btn-info dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" onclick="change_ev('faces-34', 1)">1</a></li>
+                            <li><a class="dropdown-item" onclick="change_ev('faces-34', 2)">2</a></li>
+                            <li><hr class="dropdown-divider"></li> 
+                            <li><a class="dropdown-item" onclick="change_ev('faces-34', 3)">3</a></li>
+                        </ul>
+                    </div>
+                    <!-- </center>
+                </div>
+                <div class="col-sm" style="max-width: 350px;"><center> -->
+                </center>
+                </div>
+				<div class="col" style="max-width: 350px;">
+					<center>
+                        <img id="imgChange-faces-34" src="./resources/faces-34/ev3_0.00.png" width="100%" style="max-width: 150px;" data-value="3">
+                        <p id="txtChange-faces-34" style="margin-top: 5px;">\[\hat{x} + 0.00 \sqrt{\lambda}\]</p>
+                        <input id="range-faces-34" type="range" min="-3" max="3" step="0.12" value="0" class="form-range custom-range" style="max-width: 150px;">
+					</center>
+				</div>
+
+                <div class="col" style="max-width: 350px;">
+					<center>
+                        <img src="./resources/faces-227/npatch.png" width="100%" style="max-width: 150px;">
+                        <p style="margin-top: 5px;">Noisy Image</p>
+					</center>
+				</div>
+                <div class="col" style="max-width: 350px;"><center>
+                    <img id="imgEV-faces-227" src="./resources/faces-227/pc1_eigvec.png" width="100%" style="max-width: 150px;">
+                    <p id="txtEV-faces-227" style="margin-top: 5px;">PC #1</p>
+                    <div class="btn-group my-btn" id="dropdown-container-faces-227">
+                        <button type="button" onclick="change_ev('faces-227', 1)" class="btn btn-info">Change PC</button>
+                        <button type="button" class="btn my-btn-info btn-info dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" onclick="change_ev('faces-227', 2)">2</a></li>
+                            <li><a class="dropdown-item" onclick="change_ev('faces-227', 3)">3</a></li>
+                            <li><hr class="dropdown-divider"></li> 
+                            <li><a class="dropdown-item" onclick="change_ev('faces-227', 1)">1</a></li>
+                        </ul>
+                    </div>
+                    <!-- </center>
+                </div>
+                <div class="col-sm" style="max-width: 350px;"><center> -->
+                </center>
+                </div>
+				<div class="col" style="max-width: 350px;">
+					<center>
+                        <img id="imgChange-faces-227" src="./resources/faces-227/ev1_0.00.png" width="100%" style="max-width: 150px;" data-value="1">
+                        <p id="txtChange-faces-227" style="margin-top: 5px;">\[\hat{x} + 0.00 \sqrt{\lambda}\]</p>
+                        <input id="range-faces-227" type="range" min="-3" max="3" step="0.12" value="0" class="form-range custom-range" style="max-width: 150px;">
+					</center>
+				</div>
+            </div>
+        </div>
+            <!-- End of Faces -->
+
+        <hr id="marg-dist">
+		<center><h1 style="margin-top: 65px;">Estimation of Marginal Distribution along Directions</h1></center>
+		<p>We also propose an efficient way to estimate a more fine-grained characterization of the posterior by using higher-order moments along the computed principal directions.</p>
+		
+
+        <div class="container-xl">
+            <div class="row gy-3 row-cols-1 row-cols-sm-3  justify-content-center">
+                <div class="col-sm-2" style="max-width: 350px;">
+					<center>
+                        <img src="./resources/parrot/npatch.png" width="100%" style="max-width: 150;">
+                        <p style="margin-top: 5px;">Noisy Image</p>
+					</center>
+				</div>
+                <div class="col-sm-2" style="max-width: 350px;">
+                    <center>
+                        <img id="imgEV-parrot" src="./resources/parrot/pc1_eigvec.png" width="100%" style="max-width: 150px;">
+                        <p id="txtEV-parrot" style="margin-top: 5px;">PC #1</p>
+                        <div class="btn-group my-btn" id="dropdown-container-parrot">
+                            <button type="button" onclick="change_ev('parrot', 1)" class="btn btn-info">Change PC</button>
+                            <button type="button" class="btn my-btn-info btn-info dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                                <span class="visually-hidden">Toggle Dropdown</span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" onclick="change_ev('parrot', 2)">2</a></li>
+                                <li><a class="dropdown-item" onclick="change_ev('parrot', 3)">3</a></li>
+                                <li><a class="dropdown-item" onclick="change_ev('parrot', 4)">2</a></li>
+                                <li><a class="dropdown-item" onclick="change_ev('parrot', 5)">2</a></li>
+                                <li><hr class="dropdown-divider"></li> 
+                                <li><a class="dropdown-item" onclick="change_ev('parrot', 1)">1</a></li>
+                            </ul>
+                        </div>
+                    <!-- </center>
+                </div>
+                <div class="col-sm" style="max-width: 350px;"><center> -->
+                    </center>
+                </div>
+				<div class="col-sm-2" style="max-width: 350px;">
+					<center>
+                        <img id="imgChange-parrot" src="./resources/parrot/ev1_0.00.png" width="100%" style="max-width: 150px;" data-value="1">
+                        <p id="txtChange-parrot" style="margin-top: 5px;">\[\hat{x} + 0.00 \sqrt{\lambda}\]</p>
+                        <input id="range-parrot" type="range" min="-3" max="3" step="0.12" value="0" class="form-range custom-range" style="max-width: 320px;">
+					</center>
+				</div>
+                <div class="col-sm-8 probimg" style="max-width: 530px;">
+					<center>
+                        <img id="probChange-parrot" src="./resources/parrot/ev1_0.00_prob.png" width="100%" data-value="3">
+					</center>
+				</div>
+
+            </div>
+            <div class="row gy-3 row-cols-1 row-cols-sm-3 justify-content-center">
+
+                <div class="col-sm-2" style="max-width: 350px;">
+					<center>
+                        <img src="./resources/tiger/npatch.png" width="100%" style="max-width: 150;">
+                        <p style="margin-top: 5px;">Noisy Image</p>
+					</center>
+				</div>
+                <div class="col-sm-2" style="max-width: 350px;"><center>
+                    <img id="imgEV-tiger" src="./resources/tiger/pc1_eigvec.png" width="100%" style="max-width: 150px;">
+                    <p id="txtEV-tiger" style="margin-top: 5px;">PC #1</p>
+                    <div class="btn-group my-btn" id="dropdown-container-tiger">
+                        <button type="button" onclick="change_ev('tiger', 1)" class="btn btn-info">Change PC</button>
+                        <button type="button" class="btn my-btn-info btn-info dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" onclick="change_ev('tiger', 2)">2</a></li>
+                            <li><a class="dropdown-item" onclick="change_ev('tiger', 3)">3</a></li>
+                            <li><hr class="dropdown-divider"></li> 
+                            <li><a class="dropdown-item" onclick="change_ev('tiger', 1)">1</a></li>
+                        </ul>
+                    </div>
+                    <!-- </center>
+                </div>
+                <div class="col-sm" style="max-width: 350px;"><center> -->
+                </center>
+                </div>
+				<div class="col-sm-2" style="max-width: 350px;">
+					<center>
+                        <img id="imgChange-tiger" src="./resources/tiger/ev1_0.00.png" width="100%" style="max-width: 150px;" data-value="1">
+                        <p id="txtChange-tiger" style="margin-top: 5px;">\[\hat{x} + 0.00 \sqrt{\lambda}\]</p>
+                        <input id="range-tiger" type="range" min="-3" max="3" step="0.12" value="0" class="form-range custom-range" style="max-width: 320px;">
+					</center>
+				</div>
+                <div class="col-sm-8 probimg" style="max-width: 530px;">
+					<center>
+                        <img id="probChange-tiger" src="./resources/tiger/ev1_0.00_prob.png" width="100%" data-value="1">
+					</center>
+				</div>
+            </div>
+
+            
+            <div class="row gy-3 row-cols-1 row-cols-sm-3 justify-content-center">
+
+                <div class="col-sm-2" style="max-width: 350px;">
+					<center>
+                        <img src="./resources/mice/npatch.png" width="100%" style="max-width: 150;">
+                        <p style="margin-top: 5px;">Noisy Image</p>
+					</center>
+				</div>
+                <div class="col-sm-2" style="max-width: 350px;"><center>
+                    <img id="imgEV-mice" src="./resources/mice/pc3_eigvec.png" width="100%" style="max-width: 150px;">
+                    <p id="txtEV-mice" style="margin-top: 5px;">PC #3</p>
+                    <div class="btn-group my-btn" id="dropdown-container-mice">
+                        <button type="button" onclick="change_ev('mice', 3)" class="btn btn-info">Change PC</button>
+                        <button type="button" class="btn my-btn-info btn-info dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" onclick="change_ev('mice', 1)">1</a></li>
+                            <li><a class="dropdown-item" onclick="change_ev('mice', 2)">2</a></li>
+                            <li><hr class="dropdown-divider"></li> 
+                            <li><a class="dropdown-item" onclick="change_ev('mice', 3)">3</a></li>
+                        </ul>
+                    </div>
+                    <!-- </center>
+                </div>
+                <div class="col-sm" style="max-width: 350px;"><center> -->
+                </center>
+                </div>
+				<div class="col-sm-2" style="max-width: 350px;">
+					<center>
+                        <img id="imgChange-mice" src="./resources/mice/ev3_0.00.png" width="100%" style="max-width: 150px;" data-value="3">
+                        <p id="txtChange-mice" style="margin-top: 5px;">\[\hat{x} + 0.00 \sqrt{\lambda}\]</p>
+                        <input id="range-mice" type="range" min="-3" max="3" step="0.12" value="0" class="form-range custom-range" style="max-width: 320px;">
+					</center>
+				</div>
+                <div class="col-sm-8 probimg" style="max-width: 530px;">
+					<center>
+                        <img id="probChange-mice" src="./resources/mice/ev3_0.00_prob.png" width="100%" data-value="3">
+					</center>
+				</div>
+            </div>
+
+        </div>
+
+		<!-- Video -->
+		<hr id="more-faces">
+		<center><h1 style="margin-top: 65px;">More Samples</h1></center>
+		<!-- <p>Or video</p> -->
+		<center>
+			<div class="container-xl">
+				<div class="row justify-content-center">
+					<!-- video dropdown -->
+					<div class="col-sm" style="max-width: 800px;">
+                        <video autoplay loop muted controls width="100%">
+                            <source src="./resources/video/FacesAnimations.mp4" type="video/mp4" />
+                            Your browser does not support the video tag.
+                        </video>       
+					</div>
+				</div>
+			</div>
+			</center>
+		<br>
+		<!-- end Video -->
+
+		<!-- Paper -->
+		<hr id="paper">
+		<div class="container-xl">
+			<center><h1 style="margin-top: 65px;">Paper</h1></center>
+			<div class="row justify-content-center">
+				<div class="col-md-auto" style="padding: 1px;">
+					<a href='resources/paper.pdf' target="_blank" rel="noopener noreferrer">
+						<img alt="" class="layered-paper-big" style="height:100%; max-height: 175px;" src="./resources/paper.jpg"/>
+					</a>
+				</div>
+				<div class="col-md-auto" style="padding: 1px;">
+					<p style="font-size:14pt; margin-top: 5px;"><strong>On the Posterior Distribution in Denoising: Application to Uncertainty Quantification</strong><br>
+						Hila Manor, Tomer Michaeli.<br>
+						<a href='https://arxiv.org' target="_blank" rel="noopener noreferrer">[<i class="ai ai-arxiv"></i> Arxiv]</a>
+						<a href='resources/paper.pdf' target="_blank" rel="noopener noreferrer">[<i class="fas fa-file-pdf"></i> Paper]</a>
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<!-- bibtex citation -->
+		<p class="section" id="bibtex"><b>Bibtex</b></p>
+		<table border="0">
+		<tbody>
+			<pre class="command-copy" 
+			style=" display: block;
+					background: #eee;
+					white-space: pre;
+					-webkit-overflow-scrolling: touch;
+					max-width: 100%;
+					min-width: 100px;
+					border-radius: 20px;
+					padding: 0;;">
+
+				bibtex format of your paper 
+			</pre>
+		</tbody>
+		</table>
+		<!-- end bibtex citation -->
+
+		<div class="container-xl">
+			<p class="text-left">
+				More results and further discussion about our method can be found in the <a href="resources/supp.pdf" target="_blank" rel="noopener noreferrer">supplementary material</a>.<br>
+				Our official code implementation can be found in the official <a href="https://github.com/HilaManor/GaussianDenoisingPosterior" target="_blank" rel="noopener noreferrer">github repository</a>.
+			</p>
+		</div>
+
+		<center>
+			<table class="table" width="1" style="max-width: 400px;">
+				<tbody>
+					<tr>
+						<td width="50%" style="text-align: center;">
+							<a target="_blank" rel="noopener noreferrer" href="resources/supp.pdf" style="color:black !important;">
+								<img alt="" id="supp" class="round" width="100%" style="max-width:150px" border="1px solid" src="./resources/supp.jpg"/>
+							</a>
+						</td>
+						<td width="50%" style="text-align: center;">
+							<a href="https://github.com/HilaManor/GaussianDenoisingPosterior" target="_blank" rel="noopener noreferrer">
+								<img alt="" id="github_logo" class="round" width="100%" style="max-width:150px" src="./resources/github_logo.png"/>
+							</a>
+						</td>
+					</tr>
+					<tr>
+						<td style="font-size:14pt; text-align: center;">
+							<a href='resources/supp.pdf' target="_blank" rel="noopener noreferrer">[Supplementary]</a>
+						</td>
+						<td style="font-size:14pt; text-align: center;">
+							<a target="_blank" rel="noopener noreferrer" href='https://github.com/HilaManor/GaussianDenoisingPosterior'>[Code]</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</center>
+
+		<hr>
+		<br>
+
+		<!-- acknowledgement -->
+		<div class="container-xl">
+			<center><h3>Acknowledgements</h3></center>
+			<p style="font-size: 11pt;">
+				This webpage was originally made by <a href="https://www.linkedin.com/in/matan-kleiner/" target="_blank" rel="noopener noreferrer">Matan Kleiner</a> with the 
+				help of <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/hilamanor/">Hila Manor</a> 
+				for <a target="_blank" rel="noopener noreferrer" href="https://matankleiner.github.io/sinddm/">SinDDM</a> and can be used as a template.<br>
+				It is inspired by the template that was originally made by <a target="_blank" rel="noopener noreferrer" href="http://web.mit.edu/phillipi/">Phillip Isola</a> and
+				<a target="_blank" rel="noopener noreferrer" href="http://richzhang.github.io/">Richard Zhang</a> for a <a target="_blank" rel="noopener noreferrer" href="http://richzhang.github.io/colorization/">colorful</a> ECCV project;
+				the code for the original template can be found <a target="_blank" rel="noopener noreferrer" href="https://github.com/richzhang/webpage-template">here</a>.<br>
+				A lot of features are taken from <a target="_blank" rel="noopener noreferrer" href="https://getbootstrap.com/">bootstrap</a>. All icons are taken from <a target="_blank" rel="noopener noreferrer" href="https://fontawesome.com/">font awesome</a>.
+				<br>
+				</a>
+			</p>
+		</div>
+	<br>
+
+</div>
+
+<script src="functionality.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
+
