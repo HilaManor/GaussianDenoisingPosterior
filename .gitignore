@@ -1,0 +1,8 @@
+DDPM_FFHQ/celeba_19/*
+DDPM_FFHQ/ffhq_34/*
+**/__pycache__/*
+.vscode/*
+FMD/**/*.png
+FMD/**/desktop.ini
+Outputs/
+additional_testsets/
