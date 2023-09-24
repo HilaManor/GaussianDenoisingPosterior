@@ -11,6 +11,7 @@ body {
     padding:0px;
 }
 
+
 p {
     font-size: 14pt;
 }
@@ -177,11 +178,31 @@ td {
 /* slider */
 .custom-range::-webkit-slider-thumb {
     background-color: #62dbff !important;
-  }
+}
+  
+.custom-range::-moz-range-thumb {
+    background: #62dbff !important;
+}
 
-.custom-range2 {
-    accent-color: #62dbff !important;
-  }
+.custom-range::-ms-thumb {
+    background: #62dbff !important;
+}
+
+.custom-range-disabled::-webkit-slider-thumb {
+    background-color: gray !important;
+}
+  
+.custom-range-disabled::-moz-range-thumb {
+    background: gray !important;
+}
+
+.custom-range-disabled-disabled::-ms-thumb {
+    background: gray !important;
+}
+
+
+
+
 
   .range-slider {
     position: relative;

@@ -1,8 +1,10 @@
-<script type="text/javascript">google.load("jquery", "1.3.2");</script>
+<!-- <script type="text/javascript">google.load("jquery", "1.3.2");</script> -->
 
 <!doctype html>
 <html>
 <head>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico?">
+
 	<title>On the Posterior Distribution in Denoising: Application to Uncertainty Quantification</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -102,6 +104,7 @@
 		<hr id="uncertainty-viz">
 		<center><h1 style="margin-top: 65px;">Uncertainty Visualization</h1></center>
 		<p>We propose an efficient way to compute the principal components of the posterior distribution.</p>
+            <p>Please allow a second or so for the image to update after each slider move.</p>
 		
 		<div class="container-xl">
 			<div class="row gy-3 row-cols-1 row-cols-sm-3 row-cols-md-6 justify-content-center">
@@ -136,7 +139,7 @@
 					<center>
                         <img id="imgChange-faces-514" src="./resources/faces-514/ev3_0.00.png" width="100%" style="max-width: 150px;" data-value="3">
                         <p id="txtChange-faces-514" style="margin-top: 5px;">\[\hat{x} + 0.00 \sqrt{\lambda}\]</p>
-                        <input id="range-faces-514" type="range" min="-3" max="3" step="0.12" value="0" class="form-range custom-range" style="max-width: 150px;">
+                        <input id="range-faces-514" type="range" min="-3" max="3" step="0.12" value="0" class="form-range custom-range-disabled" style="max-width: 150px;" disabled>
 					</center>
 				</div>
 
@@ -170,7 +173,7 @@
 					<center>
                         <img id="imgChange-faces-213" src="./resources/faces-213/ev1_0.00.png" width="100%" style="max-width: 150px;" data-value="1">
                         <p id="txtChange-faces-213" style="margin-top: 5px;">\[\hat{x} + 0.00 \sqrt{\lambda}\]</p>
-                        <input id="range-faces-213" type="range" min="-3" max="3" step="0.12" value="0" class="form-range custom-range" style="max-width: 150px;">
+                        <input id="range-faces-213" type="range" min="-3" max="3" step="0.12" value="0" class="form-range custom-range-disabled" style="max-width: 150px;" disabled>
 					</center>
 				</div>
             
@@ -204,7 +207,7 @@
 					<center>
                         <img id="imgChange-faces-34" src="./resources/faces-34/ev3_0.00.png" width="100%" style="max-width: 150px;" data-value="3">
                         <p id="txtChange-faces-34" style="margin-top: 5px;">\[\hat{x} + 0.00 \sqrt{\lambda}\]</p>
-                        <input id="range-faces-34" type="range" min="-3" max="3" step="0.12" value="0" class="form-range custom-range" style="max-width: 150px;">
+                        <input id="range-faces-34" type="range" min="-3" max="3" step="0.12" value="0" class="form-range custom-range-disabled" style="max-width: 150px;" disabled>
 					</center>
 				</div>
 
@@ -238,7 +241,7 @@
 					<center>
                         <img id="imgChange-faces-227" src="./resources/faces-227/ev1_0.00.png" width="100%" style="max-width: 150px;" data-value="1">
                         <p id="txtChange-faces-227" style="margin-top: 5px;">\[\hat{x} + 0.00 \sqrt{\lambda}\]</p>
-                        <input id="range-faces-227" type="range" min="-3" max="3" step="0.12" value="0" class="form-range custom-range" style="max-width: 150px;">
+                        <input id="range-faces-227" type="range" min="-3" max="3" step="0.12" value="0" class="form-range custom-range-disabled" style="max-width: 150px;" disabled>
 					</center>
 				</div>
             </div>
@@ -247,7 +250,9 @@
 
         <hr id="marg-dist">
 		<center><h1 style="margin-top: 65px;">Estimation of Marginal Distribution along Directions</h1></center>
-		<p>We also propose an efficient way to estimate a more fine-grained characterization of the posterior by using higher-order moments along the computed principal directions.</p>
+		<p>We also propose an efficient way to estimate a more fine-grained characterization of the posterior by using
+            higher-order moments along the computed principal directions.</p>
+        <p>Please allow a second or so for the image and the density image to update after each slider move.</p>
 		
 
         <div class="container-xl">
@@ -270,8 +275,8 @@
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" onclick="change_ev('parrot', 2)">2</a></li>
                                 <li><a class="dropdown-item" onclick="change_ev('parrot', 3)">3</a></li>
-                                <li><a class="dropdown-item" onclick="change_ev('parrot', 4)">2</a></li>
-                                <li><a class="dropdown-item" onclick="change_ev('parrot', 5)">2</a></li>
+                                <li><a class="dropdown-item" onclick="change_ev('parrot', 4)">4</a></li>
+                                <li><a class="dropdown-item" onclick="change_ev('parrot', 5)">5</a></li>
                                 <li><hr class="dropdown-divider"></li> 
                                 <li><a class="dropdown-item" onclick="change_ev('parrot', 1)">1</a></li>
                             </ul>
@@ -285,7 +290,7 @@
 					<center>
                         <img id="imgChange-parrot" src="./resources/parrot/ev1_0.00.png" width="100%" style="max-width: 150px;" data-value="1">
                         <p id="txtChange-parrot" style="margin-top: 5px;">\[\hat{x} + 0.00 \sqrt{\lambda}\]</p>
-                        <input id="range-parrot" type="range" min="-3" max="3" step="0.12" value="0" class="form-range custom-range" style="max-width: 320px;">
+                        <input id="range-parrot" type="range" min="-3" max="3" step="0.12" value="0" class="form-range custom-range-disabled" style="max-width: 320px;" disabled>
 					</center>
 				</div>
                 <div class="col-sm-8 probimg" style="max-width: 530px;">
@@ -327,7 +332,7 @@
 					<center>
                         <img id="imgChange-tiger" src="./resources/tiger/ev1_0.00.png" width="100%" style="max-width: 150px;" data-value="1">
                         <p id="txtChange-tiger" style="margin-top: 5px;">\[\hat{x} + 0.00 \sqrt{\lambda}\]</p>
-                        <input id="range-tiger" type="range" min="-3" max="3" step="0.12" value="0" class="form-range custom-range" style="max-width: 320px;">
+                        <input id="range-tiger" type="range" min="-3" max="3" step="0.12" value="0" class="form-range custom-range-disabled" style="max-width: 320px;" disabled>
 					</center>
 				</div>
                 <div class="col-sm-8 probimg" style="max-width: 530px;">
@@ -370,7 +375,7 @@
 					<center>
                         <img id="imgChange-mice" src="./resources/mice/ev3_0.00.png" width="100%" style="max-width: 150px;" data-value="3">
                         <p id="txtChange-mice" style="margin-top: 5px;">\[\hat{x} + 0.00 \sqrt{\lambda}\]</p>
-                        <input id="range-mice" type="range" min="-3" max="3" step="0.12" value="0" class="form-range custom-range" style="max-width: 320px;">
+                        <input id="range-mice" type="range" min="-3" max="3" step="0.12" value="0" class="form-range custom-range-disabled" style="max-width: 320px;" disabled>
 					</center>
 				</div>
                 <div class="col-sm-8 probimg" style="max-width: 530px;">
