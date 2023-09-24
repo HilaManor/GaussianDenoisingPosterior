@@ -81,7 +81,7 @@ https://github.com/HilaManor/GaussianDenoisingPosterior/assets/53814901/1dcaf617
 
 ## [Citation](#citation)
 
-You can cite us via:
+If you use this code for your research, please cite our paper:
 
 ```
 @{
