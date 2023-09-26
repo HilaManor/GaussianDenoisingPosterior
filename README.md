@@ -10,7 +10,8 @@
 [Project page](https://HilaManor.github.io/GaussianDenoisingPosterior) | [Arxiv](https://arxiv.org/abs/2309.13598) | [Supplementary materials](https://hilamanor.github.io/GaussianDenoisingPosterior/resources/supp.pdf)
 
 
-**This is the anonymous submission version. The final version will be published after acceptance (and after code-cleanup).**
+https://github.com/HilaManor/GaussianDenoisingPosterior/assets/53814901/2b662ea6-ea42-4469-b53b-fb85729863bd
+
 
 ## Table of Contents
 
@@ -75,6 +76,10 @@ Use `--help` for more information on the parameters and other options, such as `
 Use `-v` to calculate the higher-order moments and estimate the density along the PCs.
 
 ## More Examples
+
+
+
+https://github.com/HilaManor/GaussianDenoisingPosterior/assets/53814901/7d209056-83a7-4fbb-89de-af814cacd6a4
 
 
 
