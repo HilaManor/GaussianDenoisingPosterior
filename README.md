@@ -84,7 +84,10 @@ https://github.com/HilaManor/GaussianDenoisingPosterior/assets/53814901/1dcaf617
 If you use this code for your research, please cite our paper:
 
 ```
-@{
-
+@article{manor2023posterior,
+    title={On the Posterior Distribution in Denoising: Application to Uncertainty Quantification},
+    author={Hila Manor and Tomer Michaeli}, journal={arXiv preprint arXiv:2305.10124},
+    journal={arXiv preprint arXiv:2309.13598},
+    year={2023},
 }
 ```
