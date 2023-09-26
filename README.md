@@ -7,9 +7,8 @@
 
 # On the Posterior Distribution in Denoising: Application to Uncertainty Quantification Official Implementation
 
-[Project page](https://HilaManor.github.io/GaussianDenoisingPosterior) | [Arxiv]() | [Supplementary materials]()
+[Project page](https://HilaManor.github.io/GaussianDenoisingPosterior) | [Arxiv](https://arxiv.org/abs/2309.13598) | [Supplementary materials](https://hilamanor.github.io/GaussianDenoisingPosterior/resources/supp.pdf)
 
-https://github.com/HilaManor/GaussianDenoisingPosterior/assets/53814901/b2ef4e9d-ec96-4590-8098-29706402d989
 
 **This is the anonymous submission version. The final version will be published after acceptance (and after code-cleanup).**
 
@@ -77,7 +76,7 @@ Use `-v` to calculate the higher-order moments and estimate the density along th
 
 ## More Examples
 
-https://github.com/HilaManor/GaussianDenoisingPosterior/assets/53814901/1dcaf617-49c8-4d06-86e2-bdc1b4d7e86e
+
 
 ## [Citation](#citation)
 
