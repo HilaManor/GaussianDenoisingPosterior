@@ -23,8 +23,8 @@ def get_eigvecs(model: torch.nn.Module,
                 iters: int = 5,
                 double_precision: bool = False,
                 compare_backprop: bool = False) -> Union[
-                    Tuple[torch.Tensor, torch.Tensor, torch.Tensor, float, Optional[List]],
-                    Tuple[torch.Tensor, torch.Tensor, torch.Tensor, float, Optional[List],
+                    Tuple[torch.Tensor, torch.Tensor, torch.Tensor, float, Optional[List]], torch.Tensor,
+                    Tuple[torch.Tensor, torch.Tensor, torch.Tensor, float, Optional[List], torch.Tensor,
                           List[Tuple[float, float]], torch.Tensor]]:
     r"""Calculate the eigvecs of the covariance matrix using power iterations
     $\mu_1(y + \epsilon) - \mu_1(y) ~ \frac{d\mu_1(y)}{dy}\cdot\epsilon$$
@@ -47,6 +47,7 @@ def get_eigvecs(model: torch.nn.Module,
     nim = nim.to(device)
     with torch.no_grad():
         im_mmse = _forward_directional(model, nim.unsqueeze(0), device, 0, 0, double_precision).squeeze(0)
+
     print(f'MSE (x_hat, y): {torch.nn.functional.mse_loss(im_mmse, nim)}')
     print(f'sqrt (MSE (x_hat, y)): {torch.nn.functional.mse_loss(im_mmse, nim).sqrt()}')
     print(f'assumed noise sigma: {sigma}')
@@ -59,7 +60,7 @@ def get_eigvecs(model: torch.nn.Module,
         sigma = torch.nn.functional.mse_loss(im_mmse, nim).sqrt().item()
     print(f'Using assumed noise sigma: {sigma}')
     b_masked_mmse = (im_mmse * mask).repeat(n_ev, *[1]*len(nim.shape)).to(device)
-    del im_mmse
+    # del im_mmse
     torch.cuda.empty_cache()
     nim = nim.repeat(n_ev, *[1]*len(nim.shape)).to(device)
     eigvecs = torch.randn(*nim.shape, device=device, dtype=nim.dtype) * mask * c
@@ -112,9 +113,9 @@ def get_eigvecs(model: torch.nn.Module,
     eigvecs = eigvecs[indices, ...]  # TODO ?????? swap places??
 
     if compare_backprop:
-        return eigvecs, eigvals, b_masked_mmse[0], sigma, corr, cosine_similarity, timing, eigvecs_backprop
+        return eigvecs, eigvals, b_masked_mmse[0], sigma, corr, im_mmse, cosine_similarity, timing, eigvecs_backprop
 
-    return eigvecs, eigvals, b_masked_mmse[0], sigma, corr
+    return eigvecs, eigvals, b_masked_mmse[0], sigma, corr, im_mmse
 
 
 def calc_moments(model: torch.nn.Module,

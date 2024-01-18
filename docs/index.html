@@ -53,7 +53,7 @@
 		<!-- top - author names, affiliation and links -->
 		<center>
 			<h1>On the Posterior Distribution in Denoising:<br> Application to Uncertainty Quantification</h1>
-			<h4>Under Review</h4>
+			<h4>ICLR 2024</h4>
 			<div class="container-xl">
 				<div class="row justify-content-center">
 					<div class="col-md-auto">
@@ -71,9 +71,6 @@
 				<div class="row justify-content-center">
 					<div class="col-md-auto">
 						<span style="font-size:24px"><a href='resources/paper.pdf' target="_blank" rel="noopener noreferrer">[<i class="fas fa-file-pdf"></i> Paper]</a></span>
-					</div>
-					<div class="col-md-auto">
-						<span style="font-size:24px"><a href='resources/supp.pdf' target="_blank" rel="noopener noreferrer">[<i class="fas fa-file-pdf"></i> Supplementary]</a></span>
 					</div>
 					<div class="col-md-auto">
 						<span style="font-size:24px"><a href="https://github.com/HilaManor/GaussianDenoisingPosterior/" target="_blank" rel="noopener noreferrer">[<i class="fab fa-github"></i> Code]</a></span>
@@ -441,12 +438,15 @@
 					border-radius: 20px;
 					padding: 0;;">
 
-                @article{manor2023posterior,
+                @inproceedings{
+                    manor2024posterior,
                     title={On the Posterior Distribution in Denoising: Application to Uncertainty Quantification},
-                    author={Hila Manor and Tomer Michaeli}, journal={arXiv preprint arXiv:2305.10124},
-                    journal={arXiv preprint arXiv:2309.13598},
-                    year={2023},
+                    author={Hila Manor and Tomer Michaeli},
+                    booktitle={The Twelfth International Conference on Learning Representations},
+                    year={2024},
+                    url={https://openreview.net/forum?id=adSGeugiuj}
                 }
+
 			</pre>
 		</tbody>
 		</table>
@@ -454,7 +454,7 @@
 
 		<div class="container-xl">
 			<p class="text-left">
-				More results and further discussion about our method can be found in the <a href="resources/supp.pdf" target="_blank" rel="noopener noreferrer">supplementary material</a>.<br>
+				More results and further discussion about our method can be found in the supplementary material (included in the <a href="resources/paper.pdf" target="_blank" rel="noopener noreferrer">paper</a>).<br>
 				Our official code implementation can be found in the official <a href="https://github.com/HilaManor/GaussianDenoisingPosterior" target="_blank" rel="noopener noreferrer">github repository</a>.
 			</p>
 		</div>
@@ -464,20 +464,12 @@
 				<tbody>
 					<tr>
 						<td width="50%" style="text-align: center;">
-							<a target="_blank" rel="noopener noreferrer" href="resources/supp.pdf" style="color:black !important;">
-								<img alt="" id="supp" class="round" width="100%" style="max-width:150px" border="1px solid" src="./resources/supp.jpg"/>
-							</a>
-						</td>
-						<td width="50%" style="text-align: center;">
 							<a href="https://github.com/HilaManor/GaussianDenoisingPosterior" target="_blank" rel="noopener noreferrer">
 								<img alt="" id="github_logo" class="round" width="100%" style="max-width:150px" src="./resources/github_logo.png"/>
 							</a>
 						</td>
 					</tr>
 					<tr>
-						<td style="font-size:14pt; text-align: center;">
-							<a href='resources/supp.pdf' target="_blank" rel="noopener noreferrer">[Supplementary]</a>
-						</td>
 						<td style="font-size:14pt; text-align: center;">
 							<a target="_blank" rel="noopener noreferrer" href='https://github.com/HilaManor/GaussianDenoisingPosterior'>[Code]</a>
 						</td>
@@ -488,6 +480,27 @@
 
 		<hr>
 		<br>
+        <!-- NPPC -->
+        <div class="container-xl">
+			<center><h3>Related Work</h3></center>
+			<p style="font-size: 11pt;">
+                The field of Uncertainty quantification has seen increased interest over the last few years.
+                Apart from related works discussed in the paper, we would like to highlight a concurrent related work by
+                <a target="_blank" rel="noopener noreferrer" href="https://eliasnehme.github.io/">Elias Nehme</a>,
+                <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/yairomer/">Omer Yair</a>,
+                and <a href="https://tomer.net.technion.ac.il/" target="_blank" rel="noopener noreferrer">Tomer Michaeli</a>:
+            </p>
+            <center>
+                <p style="font-size:14pt; margin-top: 5px;"><strong>Uncertainty Quantification via Neural Posterior Principal Components</strong><br>
+                    Elias Nehme, Omer Yair, Tomer Michaeli. 
+                    <a href="https://arxiv.org/abs/2309.15533" target="_blank" rel="noopener noreferrer">[<i class="ai ai-arxiv"></i> ArXiv]</a>
+                    <a href="https://eliasnehme.github.io/NPPC/" target="_blank" rel="noopener noreferrer">[Project Webpage]</a>
+                    <br>
+                </p>
+            </center>
+        </div>
+
+		<hr><br>
 
 		<!-- acknowledgement -->
 		<div class="container-xl">
@@ -495,8 +508,8 @@
 			<p style="font-size: 11pt;">
 				This webpage was originally made by <a href="https://www.linkedin.com/in/matan-kleiner/" target="_blank" rel="noopener noreferrer">Matan Kleiner</a> with the 
 				help of <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/hilamanor/">Hila Manor</a> 
-				for <a target="_blank" rel="noopener noreferrer" href="https://matankleiner.github.io/sinddm/">SinDDM</a> and can be used as a template.<br>
-				It is inspired by the template that was originally made by <a target="_blank" rel="noopener noreferrer" href="http://web.mit.edu/phillipi/">Phillip Isola</a> and
+                for <a target="_blank" rel="noopener noreferrer" href="https://matankleiner.github.io/sinddm/">SinDDM</a> and can be used as a <a target="_blank" rel="noopener noreferrer" href="https://github.com/matankleiner/academic-webpage-template/tree/main">template</a>.<br>
+                It is inspired by the template that was originally made by <a target="_blank" rel="noopener noreferrer" href="http://web.mit.edu/phillipi/">Phillip Isola</a> and
 				<a target="_blank" rel="noopener noreferrer" href="http://richzhang.github.io/">Richard Zhang</a> for a <a target="_blank" rel="noopener noreferrer" href="http://richzhang.github.io/colorization/">colorful</a> ECCV project;
 				the code for the original template can be found <a target="_blank" rel="noopener noreferrer" href="https://github.com/richzhang/webpage-template">here</a>.<br>
 				A lot of features are taken from <a target="_blank" rel="noopener noreferrer" href="https://getbootstrap.com/">bootstrap</a>. All icons are taken from <a target="_blank" rel="noopener noreferrer" href="https://fontawesome.com/">font awesome</a>.

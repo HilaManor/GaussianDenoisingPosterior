@@ -50,7 +50,8 @@ def plot_eigvecs(model: ModelWrapper,
                  amount: int = 1,
                  subspace_corr: Optional[List] = None,
                  max_axis: float = 3,
-                 delta: float = 0.01):
+                 delta: float = 0.01,
+                 noisemap: Optional[torch.Tensor] = None):
 
     n_ev = eigvecs.shape[0]
 
@@ -151,6 +152,8 @@ def plot_eigvecs(model: ModelWrapper,
     save_im(toim(im), os.path.join(outdir, 'im.png'))
     save_im(toim(nim), os.path.join(outdir, 'nim.png'))
     save_im(toim(fullnim), os.path.join(outdir, 'fullnim.png'))
+    if noisemap is not None:
+        torch.save(noisemap.cpu(), os.path.join(outdir, 'noisemap.pth'))
 
     plt.close(fig)
 

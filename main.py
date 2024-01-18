@@ -150,7 +150,8 @@ if __name__ == '__main__':
                     sigma = args.noise_std
                 else:
                     sigma = (args.noise_std / 255.)
-                nim = im + sigma * torch.randn_like(im)
+                noisemap = torch.randn_like(im)
+                nim = im + sigma * noisemap
                 # if 'DDPM_FFHQ' not in args.denoiser:
                 if 'MNIST' in args.denoiser:
                     nim = nim.clip(0, 1)
@@ -186,7 +187,7 @@ if __name__ == '__main__':
         os.makedirs(outdir, exist_ok=True)
 
         # pylint: disable=unbalanced-tuple-unpacking
-        eigvecs, eigvals, mmse, sigma, subspace_corr = get_eigvecs(model,
+        eigvecs, eigvals, masked_mmse, sigma, subspace_corr, mmse = get_eigvecs(model,
                                                                    nim,  # .unsqueeze(0),
                                                                    mask,  # .unsqueeze(0),
                                                                    args.n_ev,
@@ -194,12 +195,15 @@ if __name__ == '__main__':
                                                                    device,
                                                                    c=args.const, iters=args.iters,
                                                                    double_precision=args.double_precision)
+        save_im = model.save_im
+        toim = model.toim
+        save_im(toim(mmse.cpu()), os.path.join(outdir, 'mmse.png'))
         save_eigvecs(eigvecs, eigvals, outdir)
 
         max_entropy_params = None
         if args.marginal_dist:
             moments = calc_moments(model, nim, mask, sigma, device,
-                                   mmse, eigvecs, eigvals,
+                                   masked_mmse, eigvecs, eigvals,
                                    var_c=args.var_c, skew_c=args.skew_c, kurt_c=args.kurt_c,
                                    use_poly=args.use_poly, poly_deg=args.poly_deg,
                                    poly_bound=args.poly_bound, poly_pts=args.poly_pts,
@@ -209,7 +213,7 @@ if __name__ == '__main__':
 
         patch = im[mask.to(torch.bool).cpu()].reshape(
             mask.shape[0], int(np.floor(selected_coords['y2'])) - int(np.ceil(selected_coords['y1'])), -1)
-        rpatch = mmse[mask.to(torch.bool)].reshape(
+        rpatch = masked_mmse[mask.to(torch.bool)].reshape(
             mask.shape[0], int(np.floor(selected_coords['y2'])) - int(np.ceil(selected_coords['y1'])), -1)
         npatch = nim[mask.to(torch.bool).cpu()].reshape(
             mask.shape[0], int(np.floor(selected_coords['y2'])) - int(np.ceil(selected_coords['y1'])), -1)
@@ -224,4 +228,5 @@ if __name__ == '__main__':
                      name, outdir, args.denoiser, path_name,
                      amount=args.amount,
                      max_entropy_params=max_entropy_params,
-                     subspace_corr=subspace_corr)
+                     subspace_corr=subspace_corr,
+                     noisemap=noisemap)

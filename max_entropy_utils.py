@@ -63,6 +63,10 @@ def _validate_fit_converged(moments: Moments, ev_idx: int, coeffs: List[float], 
 
     est_vmu1 = delta * sum(xs * pdf)
     est_vmu2 = delta * sum((xs - est_vmu1)**2 * pdf)
+    est_vmu3 = delta * sum((xs - est_vmu1)**3 * pdf)
+    est_vmu4 = delta * sum((xs - est_vmu1)**4 * pdf)
 
     return (abs(est_vmu1 - moments.vmu1[ev_idx]) / abs(moments.vmu1[ev_idx])) < 0.5 and \
-                    (abs(est_vmu2 - moments.vmu2[ev_idx]) / abs(moments.vmu2[ev_idx])) < 0.5
+                    (abs(est_vmu2 - moments.vmu2[ev_idx]) / abs(moments.vmu2[ev_idx])) < 0.5 and \
+                        (abs(est_vmu3 - moments.vmu3[ev_idx]) / abs(moments.vmu3[ev_idx])) < 0.5 and \
+                            (abs(est_vmu4 - moments.vmu4[ev_idx]) / abs(moments.vmu4[ev_idx])) < 0.5

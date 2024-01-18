@@ -1,11 +1,12 @@
-[![Python 3.8.0](https://img.shields.io/badge/python-3.8.10+-blue?logo=python&logoColor=white)](https://www.python.org/downloads/release/python-3810/)
+[![Python 3.8.10](https://img.shields.io/badge/python-3.8.10+-blue?logo=python&logoColor=white)](https://www.python.org/downloads/release/python-3810/)
 [![NumPy](https://img.shields.io/badge/numpy-1.24.3+-green?logo=numpy&logoColor=white)](https://pypi.org/project/numpy/1.24.3/)
 [![Matplotlib](https://img.shields.io/badge/matplotlib-3.7.1+-green?logo=plotly&logoColor=white)](https://pypi.org/project/matplotlib/3.7.1)
 [![Notebook](https://img.shields.io/badge/notebook-6.5.4+-green?logo=jupyter&logoColor=white)](https://pypi.org/project/notebook/6.5.4)
 [![torch](https://img.shields.io/badge/torch-2.0.0+-green?logo=pytorch&logoColor=white)](https://pytorch.org/)
 [![torchvision](https://img.shields.io/badge/torchvision-0.15.1+-green?logo=pytorch&logoColor=white)](https://pytorch.org/)
 
-# On the Posterior Distribution in Denoising: Application to Uncertainty Quantification Official Implementation
+# On the Posterior Distribution in Denoising: Application to Uncertainty Quantification Official Implementation [ICLR 2024]
+
 
 ###  [Project page](https://HilaManor.github.io/GaussianDenoisingPosterior) | [Arxiv](https://arxiv.org/abs/2309.13598) | [Supplementary materials](https://hilamanor.github.io/GaussianDenoisingPosterior/resources/supp.pdf)
 
@@ -92,10 +93,12 @@ https://github.com/HilaManor/GaussianDenoisingPosterior/assets/53814901/7d209056
 If you use this code for your research, please cite our paper:
 
 ```
-@article{manor2023posterior,
+@inproceedings{
+    manor2024posterior,
     title={On the Posterior Distribution in Denoising: Application to Uncertainty Quantification},
-    author={Hila Manor and Tomer Michaeli}, journal={arXiv preprint arXiv:2305.10124},
-    journal={arXiv preprint arXiv:2309.13598},
-    year={2023},
+    author={Hila Manor and Tomer Michaeli},
+    booktitle={The Twelfth International Conference on Learning Representations},
+    year={2024},
+    url={https://openreview.net/forum?id=adSGeugiuj}
 }
 ```
