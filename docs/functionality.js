@@ -147,3 +147,8 @@ function change_ev(folder_name, newEV) {
 
 window.addEventListener('load', () => {
 });
+
+function copyBib() {
+    let copyText = $("#citation")[0];
+    navigator.clipboard.writeText(copyText.getInnerHTML());
+}
