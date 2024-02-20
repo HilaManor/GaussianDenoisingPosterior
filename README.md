@@ -8,7 +8,7 @@
 # On the Posterior Distribution in Denoising: Application to Uncertainty Quantification Official Implementation [ICLR 2024]
 
 
-###  [Project page](https://HilaManor.github.io/GaussianDenoisingPosterior) | [Arxiv](https://arxiv.org/abs/2309.13598) | [Supplementary materials](https://hilamanor.github.io/GaussianDenoisingPosterior/resources/supp.pdf)
+###  [Project page](https://HilaManor.github.io/GaussianDenoisingPosterior) | [Arxiv](https://arxiv.org/abs/2309.13598) | [OpenReview](https://openreview.net/forum?id=adSGeugiuj)
 
 [Hila Manor](https://www.linkedin.com/in/hilamanor/) and [Tomer Michaeli](https://tomer.net.technion.ac.il/)      
 Technion - Israel Institute of Technology
