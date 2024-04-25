@@ -61,6 +61,7 @@ if __name__ == '__main__':
     parser.add_argument('--mnist_break_at', type=int, default=None, help='Stop iterating over MNIST at this index')
     parser.add_argument('--mnist_choose_one', type=int, default=None, help='Stop iterating over MNIST at this index')
     parser.add_argument('--fmd_choose_one', type=int, default=None, help='Choose a specific FOV from the FMD.')
+    parser.add_argument('--ni', action='store_true', help='Non interactive mode. Say yes to everything.')
     parser.add_argument('--old_noise_selection', action='store_true',
                         help='Deprecated. Only here to reproduce the paper\'s figures')
 
@@ -127,13 +128,15 @@ if __name__ == '__main__':
 
         toTensor = T.ToTensor()
 
+        noisemap = None
         # Add noise
         if args.old_noise_selection:
             im = toTensor(orig_im)
             sigma = (args.noise_std / 255.)
             im = im[:, selected_coords['y1']:selected_coords['y2'], selected_coords['x1']:selected_coords['x2']]
 
-            nim = im + sigma * torch.randn_like(im)
+            noise_map = torch.randn_like(im)
+            nim = im + sigma * noise_map
             nim = nim.clip(0, 1)
             fullfull_nim = nim
             mask = torch.ones_like(im, device=device)
@@ -161,8 +164,11 @@ if __name__ == '__main__':
             mask[:, selected_coords['y1']:selected_coords['y2'], selected_coords['x1']:selected_coords['x2']] = 1
 
             if args.padding is None:
-                sure = input(f"Are you sure you want to pass the entire {im.shape[1]}x{im.shape[2]} image through the "
-                             "model? this might take a long time, depending on the model. (y/N) ")
+                if args.ni:
+                    sure = 'y'
+                else:
+                    sure = input(f"Are you sure you want to pass the entire {im.shape[1]}x{im.shape[2]} image through the "
+                                 "model? this might take a long time, depending on the model. (y/N) ")
                 if sure != 'y':
                     exit(1)
             else:
@@ -188,13 +194,13 @@ if __name__ == '__main__':
 
         # pylint: disable=unbalanced-tuple-unpacking
         eigvecs, eigvals, masked_mmse, sigma, subspace_corr, mmse = get_eigvecs(model,
-                                                                   nim,  # .unsqueeze(0),
-                                                                   mask,  # .unsqueeze(0),
-                                                                   args.n_ev,
-                                                                   sigma,
-                                                                   device,
-                                                                   c=args.const, iters=args.iters,
-                                                                   double_precision=args.double_precision)
+                                                                                nim,  # .unsqueeze(0),
+                                                                                mask,  # .unsqueeze(0),
+                                                                                args.n_ev,
+                                                                                sigma,
+                                                                                device,
+                                                                                c=args.const, iters=args.iters,
+                                                                                double_precision=args.double_precision)
         save_im = model.save_im
         toim = model.toim
         save_im(toim(mmse.cpu()), os.path.join(outdir, 'mmse.png'))

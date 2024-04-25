@@ -163,7 +163,10 @@ td {
 }
 
 
-
+ 
+.btn-outline-secondary, .btn-outline-primary {
+    border-radius: 4rem !important;
+}
 
 
   .range-slider {
@@ -237,3 +240,38 @@ td {
     border-color: #ccc !important;
   }
   
+  .poppins-regular {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .poppins-medium {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+  }
+  
+  .poppins-semibold {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+  }
+
+
+  
+  .poppins-bold {
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+  }
+  
+  .poppins-extrabold {
+    font-family: "Poppins", sans-serif;
+    font-weight: 800;
+    font-style: normal;
+  }
+  
+  .anchor {
+    scroll-margin-top: 80px;
+}

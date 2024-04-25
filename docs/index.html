@@ -18,6 +18,11 @@
 	<script src="https://kit.fontawesome.com/ad96f96272.js" crossorigin="anonymous"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!--fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -27,7 +32,7 @@
 	<!-- navigation bar on the top, nav bar stick to the top -->
 	<nav id="navbar_top" class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary" style="margin-bottom: 15px;">
 		<div class="container-xl">
-				<a class="navbar-brand" href="https://hilamanor.github.io/GaussianDenoisingPosterior">Posterior Distribution in Denoising</a>
+				<a class="navbar-brand poppins-medium" href="https://hilamanor.github.io/GaussianDenoisingPosterior">Posterior Distribution in Denoising</a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main_nav">
 				<span class="navbar-toggler-icon"></span>
 			</button>
@@ -52,12 +57,12 @@
 
 		<!-- top - author names, affiliation and links -->
 		<center>
-			<h1>On the Posterior Distribution in Denoising:<br> Application to Uncertainty Quantification</h1>
-			<h4>ICLR 2024</h4>
-			<div class="container-xl">
+			<h1 class="poppins-medium">On the Posterior Distribution in Denoising:<br> Application to Uncertainty Quantification</h1>
+			<h4 class="poppins-regular">ICLR 2024</h4>
+			<div class="poppins-regular container-xl">
 				<div class="row justify-content-center">
 					<div class="col-md-auto">
-						<span style="font-size:24px"><a href="https://www.linkedin.com/in/hilamanor/" target="_blank" rel="noopener noreferrer">Hila Manor</a></span>
+						<span style="font-size:24px"><a href="https://hilamanor.github.com/" target="_blank" rel="noopener noreferrer">Hila Manor</a></span>
 					</div>
 					<div class="col-md-auto">
 						<span style="font-size:24px"><a href="https://tomer.net.technion.ac.il/" target="_blank" rel="noopener noreferrer">Tomer Michaeli</a></span>
@@ -65,15 +70,19 @@
 				</div>
 			</div>
 
-			<p class="text-center affilation" style="font-size: 20pt;">Technion - Israel Institute of Technology<p>
+			<p class="text-center affilation poppins-regular" style="font-size: 20pt;">Technion - Israel Institute of Technology<p>
 
-			<div class="container-xl">
+			<div class="container-xl poppins-regular">
 				<div class="row justify-content-center">
 					<div class="col-md-auto">
-						<span style="font-size:24px"><a href='resources/paper.pdf' target="_blank" rel="noopener noreferrer">[<i class="fas fa-file-pdf"></i> Paper]</a></span>
+                            <a style="font-size:24px" class="btn btn-lg btn-outline-primary" href='https://arxiv.org/abs/2309.13598' role="button" target="_blank" rel="noopener noreferrer">
+                                <i class="ai ai-arxiv" aria-hidden="true"></i> ArXiv
+                            </a>
 					</div>
 					<div class="col-md-auto">
-						<span style="font-size:24px"><a href="https://github.com/HilaManor/GaussianDenoisingPosterior/" target="_blank" rel="noopener noreferrer">[<i class="fab fa-github"></i> Code]</a></span>
+						<a href="https://github.com/HilaManor/GaussianDenoisingPosterior/" style="font-size:24px" class="btn btn-lg btn-outline-primary" role="button" target="_blank" rel="noopener noreferrer">
+                            <i class="fa fa-github" aria-hidden="true"></i> Code
+                        </a>
 					</div>
 				</div>
 			</div>
@@ -88,7 +97,7 @@
                     Your browser does not support the video tag.
                   </video>                  
 			</div>
-		<h1 style="margin-top: 10px;">Abstract</h1>
+		<h1 style="margin-top: 10px;" class="poppins-regular">Abstract</h1>
 		</center>
 		<p>
             Denoisers play a central role in many applications, from noise suppression in low-grade imaging sensors, to empowering score-based generative models. 
@@ -98,8 +107,8 @@
             Our method is fast and memory efficient, as it does not explicitly compute or store the high-order moment tensors and it requires no training or fine tuning of the denoiser.
         </p>
 	
-		<hr id="uncertainty-viz">
-		<center><h1 style="margin-top: 65px;">Uncertainty Visualization</h1></center>
+		<hr>
+		<center><h1 class="anchor poppins-regular" id="uncertainty-viz" style="margin-top: 25px;">Uncertainty Visualization</h1></center>
 		<p>We propose an efficient way to compute the principal components of the posterior distribution.</p>
             <p>Please allow a second or so for the image to update after each slider move.</p>
 		
@@ -245,8 +254,8 @@
         </div>
             <!-- End of Faces -->
 
-        <hr id="marg-dist">
-		<center><h1 style="margin-top: 65px;">Estimation of Marginal Distribution along Directions</h1></center>
+        <hr>
+		<center><h1 class="poppins-regular anchor" id="marg-dist" style="margin-top: 25px;">Estimation of Marginal Distribution along Directions</h1></center>
 		<p>We also propose an efficient way to estimate a more fine-grained characterization of the posterior by using
             higher-order moments along the computed principal directions.</p>
         <p>Please allow a second or so for the image and the density image to update after each slider move.</p>
@@ -385,8 +394,8 @@
         </div>
 
 		<!-- Video -->
-		<hr id="more-faces">
-		<center><h1 style="margin-top: 65px;">More Samples</h1></center>
+        <hr>
+		<center><h1 class="poppins-regular anchor" id="more-faces" style="margin-top: 25px;">More Samples</h1></center>
 		<!-- <p>Or video</p> -->
 		<center>
 			<div class="container-xl">
@@ -405,23 +414,67 @@
 		<!-- end Video -->
 
 		<!-- Paper -->
-		<hr id="paper">
-		<div class="container-xl">
-			<center><h1 style="margin-top: 65px;">Paper</h1></center>
+		<hr>
+		<div class="container-md">
+			<center><h1 class="poppins-regular anchor" id="paper" style="margin-top: 25px;">Paper</h1></center>
 			<div class="row justify-content-center">
-				<div class="col-md-auto" style="padding: 1px;">
-					<a href='resources/paper.pdf' target="_blank" rel="noopener noreferrer">
+                <div class="col">
+                    <center><p style="font-size:14pt; margin-top: 5px;"><strong>On the Posterior Distribution in Denoising: Application to Uncertainty Quantification</strong><br>
+						Hila Manor, Tomer Michaeli.<br>
+					</p></center>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md d-flex justify-content-md-end justify-content-sm-center">
+                    <div>
+                        <center>
+                        <a href="https://arxiv.org/abs/2309.13598" target="_blank" rel="noopener noreferrer">
+                        <img alt="" class="layered-paper-big" style="height:100%; max-height: 175px;" src="./resources/paper.jpg"/>
+                        </a>
+                        <br><a href="https://arxiv.org/abs/2309.13598" role="button" class="btn btn-outline-primary btn-sm" target="_blank" rel="noopener noreferrer">
+                            <i class="ai ai-arxiv"></i> Arxiv
+                        </a></center>
+                    </div>
+                </div>
+                <div class="col-md d-flex justify-content-md-start justify-content-sm-center">
+                    <div>
+                        <center>
+                        <a href="https://github.com/HilaManor/GaussianDenoisingPosterior" target="_blank" rel="noopener noreferrer">
+                            <img alt="" id="github_logo" class="round" widht="100%" style="max-height:205px" src="./resources/github_logo.png"/>
+                        </a><br>
+                        <a href="https://github.com/HilaManor/GaussianDenoisingPosterior" role="button" class="btn btn-outline-primary btn-sm" target="_blank" rel="noopener noreferrer">
+                            <i class="fa fa-github" aria-hidden="true"></i> Code
+                        </a>
+                        </center>
+                    </div>
+                </div>
+            </div>
+<!--             
+            <div class="row justify-content-center">
+				<div class="col-md-3 col-sm-auto " style="padding: 1px;">
+					<center>
+                    <a href='https://arxiv.org/pdf/2309.13598.pdf' target="_blank" rel="noopener noreferrer">
 						<img alt="" class="layered-paper-big" style="height:100%; max-height: 175px;" src="./resources/paper.jpg"/>
 					</a>
+                </center>
 				</div>
-				<div class="col-md-auto" style="padding: 1px;">
-					<p style="font-size:14pt; margin-top: 5px;"><strong>On the Posterior Distribution in Denoising: Application to Uncertainty Quantification</strong><br>
+				<div class="col-md-6 col-sm-auto" style="padding: 1px;">
+					<center><p style="font-size:14pt; margin-top: 5px;"><strong>On the Posterior Distribution in Denoising: Application to Uncertainty Quantification</strong><br>
 						Hila Manor, Tomer Michaeli.<br>
-						<a href='https://arxiv.org/abs/2309.13598' target="_blank" rel="noopener noreferrer">[<i class="ai ai-arxiv"></i> Arxiv]</a>
-						<a href='resources/paper.pdf' target="_blank" rel="noopener noreferrer">[<i class="fas fa-file-pdf"></i> Paper]</a>
-					</p>
+                        <a href="https://arxiv.org/abs/2309.13598" role="button" class="btn btn-outline-primary btn-sm" target="_blank" rel="noopener noreferrer">
+                            <i class="ai ai-arxiv"></i> Arxiv
+                        </a>
+                        <a href="https://github.com/HilaManor/GaussianDenoisingPosterior" role="button" class="btn btn-outline-primary btn-sm" target="_blank" rel="noopener noreferrer">
+                            <i class="fa fa-github" aria-hidden="true"></i> Code
+                        </a>
+					</p></center>
 				</div>
-			</div>
+                <div class="col-md-2 col-sm-auto" style="padding: 1px;">
+                    <center><a href="https://github.com/HilaManor/GaussianDenoisingPosterior" target="_blank" rel="noopener noreferrer">
+                        <img alt="" id="github_logo" class="round" width="100%" style="max-width:150px" src="./resources/github_logo.png"/>
+                    </a></center>
+                </div>
+			</div> -->
 		</div>
 
 		<!-- bibtex citation -->
@@ -443,12 +496,12 @@
 
 		<div class="container-xl">
 			<p class="text-left">
-				More results and further discussion about our method can be found in the supplementary material (included in the <a href="resources/paper.pdf" target="_blank" rel="noopener noreferrer">paper</a>).<br>
-				Our official code implementation can be found in the official <a href="https://github.com/HilaManor/GaussianDenoisingPosterior" target="_blank" rel="noopener noreferrer">github repository</a>.
+				More results and further discussion about our method can be found in the supplementary material (included in the <a href="https://arxiv.org/abs/2309.13598" target="_blank" rel="noopener noreferrer">paper</a>).<br>
+				<!-- Our official code implementation can be found in the official <a href="https://github.com/HilaManor/GaussianDenoisingPosterior" target="_blank" rel="noopener noreferrer">github repository</a>. -->
 			</p>
 		</div>
 
-		<center>
+		<!-- <center>
 			<table class="table" width="1" style="max-width: 400px;">
 				<tbody>
 					<tr>
@@ -465,13 +518,72 @@
 					</tr>
 				</tbody>
 			</table>
-		</center>
+		</center> -->
 
 		<hr><br>
 
+        <!--Related Works-->
+		<div class="container-xl">
+			<center><h3 class="poppins-regular">Recent Related Work</h3></center>
+            <p>
+                Recently the field of uncertainty quantification and its applications have witnessed a number of interesting works in the area of semantic uncertainty. If this work interested you, you might also want to take a look at the following works that dealt with semantic uncertainty:
+            </p>
+
+            <ul style="padding-left: 6rem; padding-right: 6rem;">
+                <li>
+                    Chenlin Meng, Yang Song, Wenzhe Li and Stefano Ermon.
+                    <strong>Estimating High Order Gradients of the Data Distribution by Denoising.</strong>
+                    NeurIPS, 2021.
+                    [<a href="https://proceedings.neurips.cc/paper/2021/hash/d582ac40970f9885836a61d7b2c662e4-Abstract.html">Proceedings</a>]
+                    [<a href="https://github.com/chenlin9/high_order_dsm">Code</a>]
+                </li>
+                <li>
+                    Omer Belhasin, Yaniv Romano, Daniel Freedman, Ehud Rivlin, and Michael Elad. 
+                    <strong>Principal uncertainty quantification with spatial correlation for image restoration problems.</strong>
+                    IEEE TPAMI, 2023.
+                    [<a href="https://ieeexplore.ieee.org/abstract/document/10360418">PDF</a>]
+                    [<a href="https://github.com/omerb01/puq">Code</a>]                    
+                </li>
+                <li>
+                    Elias Nehme, Omer Yair, and Tomer Michaeli. 
+                    <strong>Uncertainty quantification via neural posterior principal components.</strong> 
+                    NeurIPS, 2023.
+                    [<a href="https://proceedings.neurips.cc/paper_files/paper/2023/hash/74fc5575632191d96881d8015f79dde3-Abstract-Conference.html">Proceedings</a>]
+                    [<a href="https://eliasnehme.github.io/NPPC">Webpage</a>]
+                    [<a href="https://github.com/EliasNehme/NPPC">Code</a>]
+                </li>
+            </ul>
+
+            <p>You might also be interested in these related and follow-up works from our lab:</p>
+            <ul style="padding-left: 6rem; padding-right: 6rem;">
+                <li>
+                    Noa Cohen, Hila Manor, Yuval Bahat, and Tomer Michaeli.
+                    <strong>From Posterior Sampling to Meaningful Diversity in Image Restoration.</strong>
+                    ICLR, 2024.
+                    [<a href="https://openreview.net/forum?id=ff2g30cZxj">Proceedings</a>]
+                    [<a href="https://noa-cohen.github.io/MeaningfulDiversityInIR/">Webpage</a>]
+                </li>
+                <li>
+                    Omer Yair, Elias Nehme and Tomer Mihcaeli. 
+                    <strong>Uncertainty Visualization via Low-Dimensional Posterior Projections.</strong>
+                    CVPR, 2024.
+                    [<a href="https://arxiv.org/pdf/2312.07804.pdf">PDF</a>]
+                </li>
+                <li>
+                    Hila Manor and Tomer Michaeli.
+                    <strong>Zero-Shot Unsupervised and Text-Based Audio Editing Using DDPM Inversion.</strong>
+                    [<a href="https://arxiv.org/pdf/2402.10009">PDF</a>]
+                    [<a href="https://hilamanor.github.io/AudioEditing/">Webpage</a>]
+                    [<a href="https://github.com/HilaManor/AudioEditingCode/">Code</a>]
+                </li>
+            </ul>
+        
+        <hr><br>
+
+
 		<!-- acknowledgement -->
 		<div class="container-xl">
-			<center><h3>Acknowledgements</h3></center>
+			<center><h3 class="poppins-regular">Acknowledgements</h3></center>
 			<p style="font-size: 11pt;">
 				This webpage was originally made by <a href="https://www.linkedin.com/in/matan-kleiner/" target="_blank" rel="noopener noreferrer">Matan Kleiner</a> with the 
 				help of <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/hilamanor/">Hila Manor</a> 
